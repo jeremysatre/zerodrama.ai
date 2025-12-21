@@ -1067,8 +1067,8 @@
         
         let userEmail = '';
 
-        // Check if email already stored
-        const storedEmail = localStorage.getItem('zerodrama_email');
+        // Check if email already stored (session only - clears when tab closes)
+        const storedEmail = sessionStorage.getItem('zerodrama_email');
         if (storedEmail) {
             userEmail = storedEmail;
             showChatInterface();
@@ -1077,7 +1077,7 @@
         emailForm.addEventListener('submit', (e) => {
             e.preventDefault();
             userEmail = userEmailInput.value;
-            localStorage.setItem('zerodrama_email', userEmail);
+            sessionStorage.setItem('zerodrama_email', userEmail);
             
             // Here you would typically send the email to your backend/email service
             // For now, we'll just show the chat interface
@@ -1193,7 +1193,7 @@ Remember: Your goal is to help users achieve "Zero Drama" in their change initia
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'x-api-key': localStorage.getItem('zerodrama_api_key') || '',
+                        'x-api-key': sessionStorage.getItem('zerodrama_api_key') || '',
                         'anthropic-version': '2023-06-01',
                         'anthropic-dangerous-direct-browser-access': 'true'
                     },
@@ -1210,11 +1210,11 @@ Remember: Your goal is to help users achieve "Zero Drama" in their change initia
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
                     
-                    if (response.status === 401 || !localStorage.getItem('zerodrama_api_key')) {
+                    if (response.status === 401 || !sessionStorage.getItem('zerodrama_api_key')) {
                         // No API key or invalid key - prompt for key
                         const apiKey = prompt('Please enter your Claude API key to enable the chat:\n\n(Get one at console.anthropic.com)');
                         if (apiKey) {
-                            localStorage.setItem('zerodrama_api_key', apiKey);
+                            sessionStorage.setItem('zerodrama_api_key', apiKey);
                             addMessage('API key saved! Please try your question again.', 'bot');
                         } else {
                             addMessage('To use the AI assistant, you\'ll need a Claude API key. Get one at <a href="https://console.anthropic.com" target="_blank" style="color: var(--lime);">console.anthropic.com</a>', 'bot');
