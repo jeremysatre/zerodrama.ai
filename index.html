@@ -975,7 +975,6 @@
                 <div class="chat-interface" id="chat-interface">
                     <div class="chat-header">
                         <h4>Change Management Assistant</h4>
-                        <span class="chat-user-email" id="display-email"></span>
                     </div>
                     
                     <div class="chat-messages" id="chat-messages">
@@ -1063,7 +1062,6 @@
         const chatInterface = document.getElementById('chat-interface');
         const emailForm = document.getElementById('email-form');
         const userEmailInput = document.getElementById('user-email');
-        const displayEmail = document.getElementById('display-email');
         
         let userEmail = '';
 
@@ -1087,7 +1085,6 @@
         function showChatInterface() {
             emailGate.style.display = 'none';
             chatInterface.classList.add('active');
-            displayEmail.textContent = userEmail;
         }
 
         // ============================================
