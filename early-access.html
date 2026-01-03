@@ -1,1 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Access - ZeroDrama.ai</title>
+    <meta name="description" content="Get early access to ZeroDrama.ai - AI-powered change management tools. Join 200+ change leaders on the waitlist.">
+    <style>
+        :root {
+            --steel-blue: #5889A8;
+            --steel-blue-dark: #4A7A9E;
+            --lime: #B8D84F;
+            --coral: #FF9A6C;
+            --coral-dark: #FF7E4A;
+            --navy: #2C4A65;
+            --navy-dark: #1E3447;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--navy-dark);
+            background: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--steel-blue), var(--steel-blue-dark));
+            border: 3px solid var(--steel-blue-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(88, 137, 168, 0.2);
+        }
+
+        .logo-zd {
+            font-size: 28px;
+            font-weight: 900;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--steel-blue-dark);
+        }
+
+        .logo-accent { color: var(--coral); }
+
+        .badge {
+            display: inline-block;
+            background: var(--lime);
+            color: var(--navy-dark);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--navy-dark);
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--coral), var(--coral-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--steel-blue-dark);
+            margin-bottom: 40px;
+        }
+
+        .pain-points {
+            background: #F8F9FA;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            border-left: 5px solid var(--coral);
+        }
+
+        .pain-points h3 {
+            font-size: 1.3rem;
+            margin-bottom: 24px;
+        }
+
+        .pain-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 18px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+        }
+
+        .pain-icon { font-size: 24px; }
+
+        .pain-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .form-section {
+            background: linear-gradient(135deg, var(--steel-blue-dark), var(--navy-dark));
+            padding: 50px 40px;
+            border-radius: 24px;
+            margin-bottom: 50px;
+            border: 3px solid var(--lime);
+        }
+
+        .form-section h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .form-subtext {
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--lime);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--coral), var(--coral-dark));
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 154, 108, 0.5);
+        }
+
+        .privacy-note {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, var(--lime), #9BC13A);
+            color: var(--navy-dark);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .success-message.show { display: block; }
+
+        .success-message h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
+            .pain-points { padding: 25px; }
+            .form-section { padding: 35px 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-circle">
+                    <span class="logo-zd">ZD</span>
+                </div>
+                <div class="logo-text">Zero<span class="logo-accent">Drama</span>.ai</div>
+            </div>
+        </div>
+
+        <div class="hero">
+            <div class="badge">🚀 Early Access - Limited Spots</div>
+            <h1>Stop <span class="highlight">Winging</span> Change Management</h1>
+            <p class="subtitle">Get AI-powered OCM guidance before your next project stalls. Join 200+ change leaders getting early access.</p>
+        </div>
+
+        <div class="pain-points">
+            <h3>Sound Familiar?</h3>
+            <div class="pain-item">
+                <span class="pain-icon">🔴</span>
+                <span class="pain-text">Projects delayed by employee resistance you didn't see coming</span>
+            </div>
+            <div class="pain-item">
+                <span class="pain-icon">🟠</span>
+                <span class="pain-text">Adoption rates stuck at 30% three months after launch</span>
+            </div>
+            <div class="pain-item">
+                <span class="pain-icon">🟡</span>
+                <span class="pain-text">No time (or budget) for $100K consultants</span>
+            </div>
+            <div class="pain-item">
+                <span class="pain-icon">🟢</span>
+                <span class="pain-text">Flying blind on what actually works for YOUR situation</span>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Get Early Access</h2>
+            <p class="form-subtext">Be first to try ZeroDrama.ai when we launch in 6 weeks. Plus, help shape the features.</p>
+            
+            <form id="waitlist-form">
+                <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" id="firstName" name="firstName" required placeholder="Your first name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Work Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="you@company.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="role">What's Your Role? *</label>
+                    <select id="role" name="role" required>
+                        <option value="">Select your role...</option>
+                        <option value="project-manager">Project Manager</option>
+                        <option value="product-manager">Product Manager</option>
+                        <option value="change-lead">Change Management Lead</option>
+                        <option value="supervisor">Department Head/Supervisor</option>
+                        <option value="executive">Executive/Director</option>
+                        <option value="consultant">Consultant</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="challenge">Biggest Change Challenge Right Now? *</label>
+                    <select id="challenge" name="challenge" required>
+                        <option value="">Select your top challenge...</option>
+                        <option value="resistance">Employee resistance</option>
+                        <option value="adoption">Low adoption rates</option>
+                        <option value="communication">Communication breakdowns</option>
+                        <option value="training">Training effectiveness</option>
+                        <option value="leadership">Leadership buy-in</option>
+                        <option value="multiple">Multiple challenges</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    🚀 Get Early Access + Beta Discount
+                </button>
+
+                <p class="privacy-note">
+                    🔒 Your info is safe. We'll only email you about ZeroDrama.ai launch updates.
+                </p>
+            </form>
+        </div>
+
+        <div class="success-message" id="success-message">
+            <h2>🎉 You're In!</h2>
+            <p><strong>Check your email</strong> - we just sent you a confirmation.</p>
+            <p style="margin-top: 20px;">Next steps:</p>
+            <p>✅ You'll get our quick survey (2 min) to help us build what you actually need</p>
+            <p>✅ Early access when we launch in 6 weeks</p>
+            <p>✅ Exclusive beta discount (lifetime 50% off)</p>
+        </div>
+    </div>
+
+    <script>
+        // Form submission handler
+        document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                email: document.getElementById('email').value,
+                role: document.getElementById('role').value,
+                challenge: document.getElementById('challenge').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Log to console (you'll replace this with Google Sheets or email service)
+            console.log('New signup:', formData);
+
+            // TODO: Send to Google Sheets
+            // Instructions: https://github.com/jamiewilson/form-to-google-sheets
+            
+            // For now, save to localStorage as backup
+            const signups = JSON.parse(localStorage.getItem('zerodrama-signups') || '[]');
+            signups.push(formData);
+            localStorage.setItem('zerodrama-signups', JSON.stringify(signups));
+
+            // Show success message
+            document.querySelector('.form-section').style.display = 'none';
+            document.getElementById('success-message').classList.add('show');
+            document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
