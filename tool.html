@@ -200,6 +200,144 @@
             font-style: italic;
         }
 
+        /* Email Gate Step */
+        .email-step {
+            display: none;
+            max-width: 500px;
+            margin: 0 auto;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .email-step.active {
+            display: block;
+        }
+
+        .email-step-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .email-step-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .email-step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .email-step-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .email-step-form {
+            margin-bottom: 1.5rem;
+        }
+
+        .email-step-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            margin-bottom: 1rem;
+        }
+
+        .email-step-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .email-step-input:focus {
+            border-color: var(--lime);
+        }
+
+        .email-step-input.error {
+            border-color: var(--coral);
+        }
+
+        .email-step-error {
+            color: var(--coral);
+            font-size: 0.9rem;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .email-step-error.visible {
+            display: block;
+        }
+
+        .email-step-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--coral), #FF7E4A);
+            color: var(--navy);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .email-step-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 154, 108, 0.3);
+        }
+
+        .email-step-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .email-step-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            text-align: left;
+            padding: 1rem;
+            background: rgba(184, 216, 79, 0.1);
+            border-radius: 12px;
+        }
+
+        .email-step-benefit {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        .email-step-benefit span {
+            color: var(--lime);
+        }
+
+        .email-step-back {
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .email-step-back:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
         /* Intake Form */
         .intake-form {
             display: none;
@@ -1162,8 +1300,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="modal-icon">📧</div>
-                <div class="modal-title">Email Your Action Plan</div>
-                <div class="modal-subtitle">We'll send a professional report you can reference before your conversation.</div>
+                <div class="modal-title">Send a Copy</div>
+                <div class="modal-subtitle">Get a copy of this report sent to your inbox for easy reference.</div>
             </div>
             <div class="modal-form">
                 <input type="email" class="modal-input" id="email-input" placeholder="your@email.com">
@@ -1171,7 +1309,7 @@
             </div>
             <div class="modal-buttons">
                 <button class="btn btn-cancel" onclick="closeEmailModal()">Cancel</button>
-                <button class="btn btn-send" onclick="sendEmailReport()">📤 Send Report</button>
+                <button class="btn btn-send" onclick="sendEmailReport()">📤 Send Copy</button>
             </div>
         </div>
     </div>
@@ -1206,6 +1344,32 @@
                     <div class="mode-title">I'm Caught in the Middle</div>
                     <div class="mode-description">"Leadership expects results, my team is struggling, and I'm stuck between them."</div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Step 1.5: Email Gate -->
+        <div class="email-step" id="email-step">
+            <div class="email-step-card">
+                <div class="email-step-icon">📋</div>
+                <div class="email-step-title">Get Your Free Action Plan</div>
+                <div class="email-step-subtitle">
+                    Enter your email to receive your personalized diagnosis, conversation scripts, and step-by-step action plan.
+                </div>
+                <div class="email-step-form">
+                    <input type="email" class="email-step-input" id="gate-email-input" placeholder="your@email.com" autocomplete="email">
+                    <div class="email-step-error" id="gate-email-error">Please enter a valid email address</div>
+                    <input type="text" class="email-step-input" id="gate-name-input" placeholder="Your name (optional)" autocomplete="name">
+                    <button class="email-step-btn" id="gate-continue-btn" onclick="submitGateEmail()">
+                        Continue to Your Action Plan →
+                    </button>
+                </div>
+                <div class="email-step-benefits">
+                    <div class="email-step-benefit"><span>✓</span> Diagnostic labels for your situation</div>
+                    <div class="email-step-benefit"><span>✓</span> Scripts you can copy and use</div>
+                    <div class="email-step-benefit"><span>✓</span> Step-by-step action checklist</div>
+                    <div class="email-step-benefit"><span>✓</span> Downloadable PDF report</div>
+                </div>
+                <div class="email-step-back" onclick="backToModeSelection()">← Choose a different situation</div>
             </div>
         </div>
 
@@ -1495,13 +1659,80 @@
             currentQuestionIndex = 0;
             answers = { mode: mode };
 
+            // Show email gate step instead of going directly to intake
             setTimeout(() => {
                 document.getElementById('mode-step').style.display = 'none';
-                document.getElementById('intake-form').classList.add('active');
-                buildQuestions();
-                showQuestion(0);
+                document.getElementById('email-step').classList.add('active');
+                document.getElementById('gate-email-input').focus();
             }, 300);
         }
+
+        // ============================================
+        // EMAIL GATE FUNCTIONS
+        // ============================================
+        let capturedEmail = '';
+        let capturedName = '';
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function submitGateEmail() {
+            const emailInput = document.getElementById('gate-email-input');
+            const nameInput = document.getElementById('gate-name-input');
+            const errorEl = document.getElementById('gate-email-error');
+            const email = emailInput.value.trim();
+            const name = nameInput.value.trim();
+
+            // Validate email
+            if (!validateEmail(email)) {
+                emailInput.classList.add('error');
+                errorEl.classList.add('visible');
+                return;
+            }
+
+            // Clear error state
+            emailInput.classList.remove('error');
+            errorEl.classList.remove('visible');
+
+            // Store for later use
+            capturedEmail = email;
+            capturedName = name;
+
+            // Track email capture
+            gtag('event', 'email_captured', {
+                'event_category': 'conversion',
+                'event_label': currentMode
+            });
+
+            // Proceed to intake form
+            document.getElementById('email-step').classList.remove('active');
+            document.getElementById('intake-form').classList.add('active');
+            buildQuestions();
+            showQuestion(0);
+        }
+
+        function backToModeSelection() {
+            document.getElementById('email-step').classList.remove('active');
+            document.getElementById('mode-step').style.display = 'block';
+            // Clear any selected mode
+            document.querySelectorAll('.mode-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+        }
+
+        // Allow Enter key to submit email
+        document.addEventListener('DOMContentLoaded', function() {
+            const gateEmailInput = document.getElementById('gate-email-input');
+            if (gateEmailInput) {
+                gateEmailInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        submitGateEmail();
+                    }
+                });
+            }
+        });
 
         // ============================================
         // FORM BUILDING
@@ -1872,7 +2103,7 @@ TONE: Calm. Grounded. Direct. Respectful. Practical.`;
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: 'claude-3-haiku-20240307',
+                    model: 'claude-3-5-sonnet-20241022',
                     max_tokens: 2048,
                     system: systemPrompt,
                     messages: conversationHistory
@@ -2049,6 +2280,13 @@ TONE: Calm. Grounded. Direct. Respectful. Practical.`;
         // REPORT ACTIONS
         // ============================================
         function openEmailModal() {
+            // Pre-populate with captured email from gate
+            if (capturedEmail) {
+                document.getElementById('email-input').value = capturedEmail;
+            }
+            if (capturedName) {
+                document.getElementById('name-input').value = capturedName;
+            }
             document.getElementById('email-modal').classList.add('active');
             document.getElementById('email-input').focus();
         }
