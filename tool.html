@@ -2102,12 +2102,11 @@ TONE: Calm. Grounded. Direct. Respectful. Practical.`;
             const response = await fetch('https://zerodrama-api.jeremysatre.workers.dev/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: 'claude-3-5-sonnet-20241022',
-                    max_tokens: 2048,
-                    system: systemPrompt,
-                    messages: conversationHistory
-                })
+body: JSON.stringify({
+    model: 'claude-sonnet-4-5-20250514',
+    max_tokens: 4096,
+    system: systemPrompt,
+    messages: conversationHistory
             });
 
             const data = await response.json();
