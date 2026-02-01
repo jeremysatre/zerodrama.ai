@@ -931,6 +931,98 @@
             color: var(--navy);
         }
 
+        /* Upgrade Modal */
+        .upgrade-modal-content {
+            max-width: 500px;
+        }
+
+        .upgrade-modal-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 500px) {
+            .upgrade-modal-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .upgrade-modal-option {
+            display: block;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .upgrade-modal-option:hover {
+            border-color: var(--lime);
+            transform: translateY(-2px);
+        }
+
+        .upgrade-modal-option.featured {
+            border-color: var(--lime);
+            background: rgba(184, 216, 79, 0.1);
+        }
+
+        .upgrade-modal-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--lime);
+            color: var(--navy-dark);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+        }
+
+        .upgrade-modal-option-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .upgrade-modal-option-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--lime);
+            margin-bottom: 0.25rem;
+        }
+
+        .upgrade-modal-option-price span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .upgrade-modal-option-desc {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .upgrade-modal-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 1rem;
+        }
+
+        .upgrade-modal-note a {
+            color: var(--lime);
+            text-decoration: none;
+        }
+
+        .upgrade-modal-note a:hover {
+            text-decoration: underline;
+        }
+
         /* Chat Refinement */
         .chat-refinement {
             background: var(--glass-bg);
@@ -1423,6 +1515,34 @@
                 <button class="btn btn-cancel" onclick="closeEmailModal()">Cancel</button>
                 <button class="btn btn-send" onclick="sendEmailReport()">📤 Send Copy</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Upgrade Modal -->
+    <div class="modal-overlay" id="upgrade-modal">
+        <div class="modal-content upgrade-modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🎯</div>
+                <div class="modal-title">You've used your free diagnostic</div>
+                <div class="modal-subtitle">Upgrade to run another assessment and keep the momentum going.</div>
+            </div>
+            <div class="upgrade-modal-options">
+                <a href="https://buy.stripe.com/00w4gz2Ki2zhbW1dAK77O00" target="_blank" class="upgrade-modal-option">
+                    <div class="upgrade-modal-option-name">Single Report</div>
+                    <div class="upgrade-modal-option-price">$9.99</div>
+                    <div class="upgrade-modal-option-desc">One additional diagnostic</div>
+                </a>
+                <a href="https://buy.stripe.com/8x214nckS7TB8JPbsC77O01" target="_blank" class="upgrade-modal-option featured">
+                    <div class="upgrade-modal-badge">Best Value</div>
+                    <div class="upgrade-modal-option-name">Pro Monthly</div>
+                    <div class="upgrade-modal-option-price">$24.99<span>/mo</span></div>
+                    <div class="upgrade-modal-option-desc">5 diagnostics per month</div>
+                </a>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-cancel" onclick="closeUpgradeModal()">Maybe later</button>
+            </div>
+            <p class="upgrade-modal-note">Questions? <a href="https://calendly.com/zerodrama/discovery-call" target="_blank">Book a call</a></p>
         </div>
     </div>
 
@@ -2037,6 +2157,20 @@
         }
 
         function startOver() {
+            // Check if user has already used their free diagnostic
+            const hasUsedFree = localStorage.getItem('zerodrama_free_used') === 'true';
+            
+            if (hasUsedFree) {
+                // Show upgrade modal
+                document.getElementById('upgrade-modal').classList.add('active');
+                return;
+            }
+            
+            // If they haven't used free yet, proceed normally
+            doStartOver();
+        }
+
+        function doStartOver() {
             document.getElementById('results').classList.remove('active');
             document.getElementById('mode-step').style.display = 'block';
             document.querySelectorAll('.mode-card').forEach(card => {
@@ -2048,6 +2182,10 @@
             conversationHistory = [];
             fullReportText = '';
             document.getElementById('chat-messages').innerHTML = '';
+        }
+
+        function closeUpgradeModal() {
+            document.getElementById('upgrade-modal').classList.remove('active');
         }
 
         // ============================================
@@ -2153,6 +2291,9 @@
                         'event_label': currentMode
                     });
                 }
+
+                // Mark free diagnostic as used
+                localStorage.setItem('zerodrama_free_used', 'true');
 
             } catch (error) {
                 loading.classList.remove('active');
